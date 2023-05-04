@@ -113,7 +113,7 @@ func ExtractAccessMetadata(req *fiber.Ctx) (jwt.MapClaims, error) {
 func ExtractRefreshMetadata(refreshString string) (jwt.MapClaims, error) {
 
 	// get secret key.
-	secretKey, err := config.Get("ASANBILIT_KEY")
+	secretKey, err := config.Get("SECRET_KEY")
 	if err != nil {
 		return nil, err
 	}

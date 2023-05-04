@@ -9,6 +9,7 @@ import (
 	"github.com/dozheiny/it-captal-task/pkg/redis"
 	"github.com/dozheiny/it-captal-task/routes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
@@ -52,6 +53,9 @@ func init() {
 
 func main() {
 	route := fiber.New()
+
+	// use recover function for recover server when panic comes.
+	route.Use(recover.New())
 
 	// Register Routers.
 	routes.RegisterAll(route)
