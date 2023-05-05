@@ -16,4 +16,5 @@ func RegisterAll(route fiber.Router) {
 
 	// ---------------- BLOG ROUTES ---------------- \\
 	route.Post("/blog", jwt.AuthMiddleware, blog.Create)
+	route.Get("/blog", jwt.AuthMiddleware, blog.GetAll)
 }

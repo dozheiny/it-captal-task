@@ -23,3 +23,11 @@ func (i *CreateBlog) Validation() error {
 
 	return nil
 }
+
+type GetBlog struct {
+	Title    string `query:"title"`
+	Content  string `query:"content"`
+	Username string `query:"username"`
+	Page     int    `query:"page"`
+	PerPage  int    `query:"per_page"`
+}
