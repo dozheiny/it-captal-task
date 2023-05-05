@@ -164,7 +164,6 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 			SetCode(http.StatusInternalServerError).
 			SetMessage(internalServerError).
 			SetDetails(err.Error()))
-
 	}
 
 	user := new(user2.Model)
@@ -183,5 +182,6 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 
 	// Set user in context.
 	ctx.Locals("user", user)
+	ctx.Locals("token", tokenAuth)
 	return ctx.Next()
 }

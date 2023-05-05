@@ -67,5 +67,6 @@ func FindUserByRefreshToken(c *fiber.Ctx) error {
 	}
 
 	c.Locals("user", u)
+	c.Locals("token", token)
 	return c.Next()
 }

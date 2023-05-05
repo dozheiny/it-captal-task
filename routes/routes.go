@@ -9,4 +9,5 @@ func RegisterAll(route fiber.Router) {
 
 	route.Post("/login", authentication.FindUserByUserName, authentication.SendAccessToken)
 	route.Patch("/refresh", authentication.FindUserByRefreshToken, authentication.SendAccessToken)
+	route.Patch("/logout", authentication.FindUserByRefreshToken, authentication.BlockToken)
 }
