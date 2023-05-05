@@ -49,7 +49,7 @@ func TestBase_SetDatabase(t *testing.T) {
 		dbNames[names[numbers]] = true
 	}
 
-	dbName := os.Getenv("DB_NAME")
+	dbName := os.Getenv("DBNAME")
 
 	if !dbNames[dbName] {
 		t.Errorf("Database dosen't sets!")
