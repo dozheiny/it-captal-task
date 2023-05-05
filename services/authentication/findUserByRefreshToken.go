@@ -20,7 +20,7 @@ func FindUserByRefreshToken(c *fiber.Ctx) error {
 	if err := c.BodyParser(inputForm); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(serializers.NewState().
 			SetCode(fiber.StatusBadRequest).
-			SetStatus(false).SetMessage(errInvalidInputForm).SetData(err))
+			SetStatus(false).SetMessage(errInvalidInputForm).SetDetails(err.Error()))
 	}
 
 	// Validate InputForm.
