@@ -2,11 +2,12 @@ package mongo_test
 
 import (
 	"context"
+	"os"
+	"testing"
+
 	"github.com/dozheiny/it-captal-task/database"
 	"github.com/dozheiny/it-captal-task/pkg/mongo"
 	"go.mongodb.org/mongo-driver/bson"
-	"os"
-	"testing"
 )
 
 func TestInit(t *testing.T) {
@@ -38,7 +39,7 @@ func TestBase_SetDatabase(t *testing.T) {
 		t.Errorf("Gotcha Error on create database. %s", err.Error())
 	}
 
-	dbNames := make(map[string]bool)
+	DB_NAMEs := make(map[string]bool)
 
 	names, err := database.Client.ListDatabaseNames(ctx, bson.D{})
 	if err != nil {
@@ -46,12 +47,12 @@ func TestBase_SetDatabase(t *testing.T) {
 	}
 
 	for numbers := range names {
-		dbNames[names[numbers]] = true
+		DB_NAMEs[names[numbers]] = true
 	}
 
-	dbName := os.Getenv("DBNAME")
+	DB_NAME := os.Getenv("DB_NAME")
 
-	if !dbNames[dbName] {
+	if !DB_NAMEs[DB_NAME] {
 		t.Errorf("Database dosen't sets!")
 	}
 

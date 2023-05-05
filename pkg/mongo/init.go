@@ -2,6 +2,7 @@ package mongo
 
 import (
 	"context"
+
 	"github.com/dozheiny/it-captal-task/config"
 	"github.com/dozheiny/it-captal-task/database"
 	"go.mongodb.org/mongo-driver/bson"
@@ -17,11 +18,11 @@ func Init(ctx context.Context) *Base {
 	return base
 }
 
-// SetDatabase given a DBName and connect to a database
-// if there's no database or DBName is wrong, it returns error.
+// SetDatabase given a DB_NAME and connect to a database
+// if there's no database or DB_NAME is wrong, it returns error.
 func (b *Base) SetDatabase() (*Base, error) {
 
-	dbName, err := config.Get("DBNAME")
+	DB_NAME, err := config.Get("DB_NAME")
 	if err != nil {
 		return nil, err
 	}
@@ -31,19 +32,19 @@ func (b *Base) SetDatabase() (*Base, error) {
 		return nil, err
 	}
 
-	dbNames := make(map[string]bool)
+	DB_NAMEs := make(map[string]bool)
 	for number := range names {
-		dbNames[names[number]] = true
+		DB_NAMEs[names[number]] = true
 	}
 
-	if dbNames[dbName] {
-		b.Database = b.Client.Database(dbName)
+	if DB_NAMEs[DB_NAME] {
+		b.Database = b.Client.Database(DB_NAME)
 		b.Client = b.Database.Client()
-		b.DataBaseName = dbName
+		b.DataBaseName = DB_NAME
 		return b, nil
 	}
 
-	return nil, dbNameNotFound
+	return nil, DB_NAMENotFound
 }
 
 // SetCollectionName sets collection name for future requests,

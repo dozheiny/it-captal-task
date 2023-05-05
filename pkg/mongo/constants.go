@@ -3,6 +3,7 @@ package mongo
 import (
 	"context"
 	"errors"
+
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -30,7 +31,7 @@ type Recorder interface {
 }
 
 var (
-	dbNameNotFound        = errors.New("database name not found, maybe db name is wrong")
+	DB_NAMENotFound       = errors.New("database name not found, maybe db name is wrong")
 	cannotConvertInsertID = errors.New("cannot convert insertID to object ID")
 	cannotDeleteRecord    = errors.New("cannot delete record")
 	NoDocuments           = mongo.ErrNoDocuments

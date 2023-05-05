@@ -15,5 +15,5 @@ jobs:
       - name: Test
         env:
           MONGODB: ${{ vars.MONGODB }}
-          DB_NAME: ${{ vars.DBNAME }}
+          DB_NAME: ${{ vars.DB_NAME }}
         run: go test -v ./...
