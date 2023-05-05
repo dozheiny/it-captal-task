@@ -6,13 +6,13 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const collectionName = "users"
+
 type Model struct {
 	ID       primitive.ObjectID `bson:"_id" json:"id"`
 	Username string             `bson:"username" json:"username"`
-	Password []byte             `bson:"password"`
+	Password []byte             `bson:"password" json:"-"`
 }
-
-const collectionName = "user"
 
 // GetCollectionName returns collection name of users' collection in Database.
 func (m *Model) GetCollectionName() string {
