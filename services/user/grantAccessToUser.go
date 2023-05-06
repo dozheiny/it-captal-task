@@ -11,6 +11,18 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// GrantAccessToUser grants access to one user/
+// @Description grant access to user
+// @Summary grant access to user
+// @Tags user
+// @Router /user/:user-id/grant-access [PUT]
+// @Accept application/json
+// @Produce json
+// @Param inputForm body serializers.GrantAccess true "input forms"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>) // @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func GrantAccessToUser(c *fiber.Ctx) error {
 	// get userID from an url path.
 	urlPath := &struct {

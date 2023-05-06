@@ -13,6 +13,18 @@ import (
 
 // FindUserByRefreshToken find user with refresh token;
 // Then save user data into context.
+// @Description refresh token
+// @Summary refresh token
+// @Tags authentication
+// @Router /refresh [PATCH]
+// @Router /logout [PATCH]
+// @Accept application/json
+// @Produce json
+// @Param inputForm body serializers.RefreshToken true "input forms"
+// @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func FindUserByRefreshToken(c *fiber.Ctx) error {
 	// Parse inputForm.
 	inputForm := new(serializers.RefreshToken)

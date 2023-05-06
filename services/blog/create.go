@@ -10,6 +10,17 @@ import (
 )
 
 // Create gets title and content form HTTP request and create new blog post.
+// @Description create blog
+// @Summary create blog
+// @Tags blog
+// @Router /blog [POST]
+// @Accept application/json
+// @Produce json
+// @Param inputForm body serializers.CreateBlog true "input forms"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>) // @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func Create(c *fiber.Ctx) error {
 	// Parse inputForm.
 	inputForm := new(serializers.CreateBlog)
