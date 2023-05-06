@@ -8,7 +8,7 @@ WORKDIR /app
 # Copy the source from the current directory to the working Directory inside the container
 COPY . .
 
-# ENV GONOPROXY="github.com/*"
+ENV GONOPROXY="github.com/*"
 # ENV GOPROXY="https://goproxy.io,direct"
 
 # RUN go get -d -v ./../cmd/api/
