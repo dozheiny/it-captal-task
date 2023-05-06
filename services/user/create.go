@@ -12,6 +12,17 @@ import (
 
 // Create gets body HTTP request and serialize it as serializer.Login;
 // Then check username, after checking username is not existed, creates that user
+// @Description create user
+// @Summary create user
+// @Tags user
+// @Router /user [POST]
+// @Accept application/json
+// @Produce json
+// @Param inputForm body serializers.Login true "input forms"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>) // @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func Create(c *fiber.Ctx) error {
 	// Parse inputForm.
 	inputForm := new(serializers.Login)

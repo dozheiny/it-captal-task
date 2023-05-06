@@ -11,6 +11,17 @@ import (
 
 // FindUserByUserName parsers serializer from serializers.Login;
 // After Validate save user into context.
+// @Description auth
+// @Summary login
+// @Tags authentication
+// @Router /login [POST]
+// @Accept application/json
+// @Produce json
+// @Param inputForm body serializers.Login true "input forms"
+// @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func FindUserByUserName(c *fiber.Ctx) error {
 	// Parse inputForm.
 	inputForm := new(serializers.Login)

@@ -11,6 +11,17 @@ import (
 
 // GetAll gets query parameters from a URL path and create a query.
 // then returns blogs contain that query
+// @Description get blogs
+// @Summary get blogs
+// @Tags blog
+// @Router /blog [GET]
+// @Accept application/json
+// @Produce json
+// @Param inputForm query serializers.GetBlog true "input queries"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>) // @Success 200 {object} serializers.State
+// @Failure 400 {object} serializers.State
+// @Failure 500 {object} serializers.State
+// @Failure 401 {object} serializers.State
 func GetAll(c *fiber.Ctx) error {
 	// Parse inputForm.
 	inputForm := new(serializers.GetBlog)

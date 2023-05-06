@@ -1,0 +1,310 @@
+definitions:
+  serializers.Counts:
+    properties:
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  serializers.CreateBlog:
+    properties:
+      content:
+        type: string
+      title:
+        type: string
+    type: object
+  serializers.GrantAccess:
+    properties:
+      ids:
+        items:
+          type: string
+        type: array
+    type: object
+  serializers.Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  serializers.RefreshToken:
+    properties:
+      refresh_token:
+        type: string
+    type: object
+  serializers.State:
+    properties:
+      code:
+        type: integer
+      counts:
+        $ref: '#/definitions/serializers.Counts'
+      data: {}
+      details:
+        type: string
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+info:
+  contact: {}
+paths:
+  /blog:
+    get:
+      consumes:
+      - application/json
+      description: get blogs
+      parameters:
+      - in: query
+        name: content
+        type: string
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: perPage
+        type: integer
+      - in: query
+        name: title
+        type: string
+      - in: query
+        name: username
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: get blogs
+      tags:
+      - blog
+    post:
+      consumes:
+      - application/json
+      description: create blog
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.CreateBlog'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: create blog
+      tags:
+      - blog
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: auth
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: login
+      tags:
+      - authentication
+  /logout:
+    patch:
+      consumes:
+      - application/json
+      description: refresh token
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.RefreshToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: refresh token
+      tags:
+      - authentication
+  /refresh:
+    patch:
+      consumes:
+      - application/json
+      description: refresh token
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.RefreshToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: refresh token
+      tags:
+      - authentication
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: create user
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.Login'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: create user
+      tags:
+      - user
+  /user/:user-id/grant-access:
+    put:
+      consumes:
+      - application/json
+      description: grant access to user
+      parameters:
+      - description: input forms
+        in: body
+        name: inputForm
+        required: true
+        schema:
+          $ref: '#/definitions/serializers.GrantAccess'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/serializers.State'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/serializers.State'
+      summary: grant access to user
+      tags:
+      - user
+swagger: "2.0"
