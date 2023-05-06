@@ -3,15 +3,17 @@ package user
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"github.com/dozheiny/it-captal-task/models/endpoints"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 const collectionName = "users"
 
 type Model struct {
-	ID       primitive.ObjectID `bson:"_id" json:"id"`
-	Username string             `bson:"username" json:"username"`
-	Password []byte             `bson:"password" json:"-"`
+	ID        primitive.ObjectID `bson:"_id" json:"id"`
+	Username  string             `bson:"username" json:"username"`
+	Password  []byte             `bson:"password" json:"-"`
+	Endpoints []endpoints.Model  `json:"endpoints" bson:"endpoints"`
 }
 
 // GetCollectionName returns collection name of users' collection in Database.
