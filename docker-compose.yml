@@ -1,0 +1,31 @@
+version: "3.1"
+
+services:
+  application:
+    container_name: "it-captal-task"
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGODB='mongodb://mongo:27017'
+      - DB_NAME='local'
+      - REDIS='keydb:6379'
+      - SECRET_KEY='superSecretPassword'
+
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+
+  keydb:
+    image: eqalpha/keydb:latest
+    container_name: keydb
+
+    command: keydb-server --server-threads 2
+    ports:
+      - "6379:6379"
+    restart: always

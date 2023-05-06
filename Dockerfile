@@ -6,8 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy the source from the current directory to the working Directory inside the container
-COPY ./ ./
-COPY .env .
+COPY . .
 
 # ENV GONOPROXY="github.com/*"
 # ENV GOPROXY="https://goproxy.io,direct"
